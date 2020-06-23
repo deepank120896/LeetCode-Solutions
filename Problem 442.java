@@ -12,16 +12,19 @@
 // Time Complexity: O(n)
 // Space Complexity: O(1)
 class Solution {
-    public List<Integer> findDuplicates(int[] nums) {
-        
-        List<Integer> result = new ArrayList<>();
-        
-        for(int i=0;i<nums.length;i++){
-            int index = Math.abs(nums[i])-1;
-            if(nums[index]<0)
-                result.add(Math.abs(nums[i]));
-            nums[index] = -nums[index];
-        }
-        return result;
-    }
+	public List<Integer> findDuplicates(int[] nums) {
+
+		List<Integer> result = new LinkedList<>();
+
+		for (int i = 0; i < nums.length; i++) {
+			// Make each number positive , to get number through index
+			int index = Math.abs(nums[i]) - 1;
+			// if number is -ve then it is repeated
+			if (nums[index] < 0)
+				result.add(index + 1);
+			// negate each number
+			nums[index] = -nums[index];
+		}
+		return result;
+	}
 }
