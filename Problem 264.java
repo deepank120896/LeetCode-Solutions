@@ -19,20 +19,26 @@
 
 class Solution {
 	public int nthUglyNumber(int n) {
-
+		// dp array to store n ugly numbers
 		int[] dp = new int[n];
+		
 		int i2, i3, i5;
+		// respective iterators for 2,3,5
 		i2 = i3 = i5 = 0;
+		// store multiples of 2,3,5 at each step
 		int multiple_2 = 2, multiple_3 = 3, multiple_5 = 5;
 		int next_ugly = 1;
 		int temp;
 
+		// special case
 		dp[0] = 1;
 
 		for (int i = 1; i < n; i++) {
+			// compute next ugly number
 			next_ugly = Math.min(multiple_2, Math.min(multiple_3, multiple_5));
 			dp[i] = next_ugly;
 
+			// increment multiple of number of which current ugly number is multiple of
 			if (next_ugly == multiple_2) {
 				i2++;
 				multiple_2 = dp[i2] * 2;
@@ -46,6 +52,7 @@ class Solution {
 				multiple_5 = dp[i5] * 5;
 			}
 		}
+		// return Nth ugly number
 		return dp[n - 1];
 	}
 }
